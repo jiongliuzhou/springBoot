@@ -6,6 +6,7 @@ spring:
     multipart:
       max-file-size: 80MB
       max-request-size: 80MB
+
 #mybatis日志配置
 mybatis:
   configuration:
