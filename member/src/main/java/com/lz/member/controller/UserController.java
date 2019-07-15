@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- *  用户管理
+ *  会员管理
  * @create 2019/5/21
  * @since 1.0.0
  */
@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 获取用户信息列表
+     * 获取会员信息列表
      * @param param
      * @return
      */
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     /**
-     * 获取用户详情
+     * 获取会员详情
      * @param param
      * @return
      */
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     /**
-     * 新增用户信息
+     * 新增会员信息
      * @param param
      * @return
      */
@@ -84,7 +84,7 @@ public class UserController {
     }
 
     /**
-     * 修改用户信息
+     * 修改会员信息
      * @param param
      * @return
      */
@@ -106,7 +106,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户信息
+     * 删除会员信息
      * @param param
      * @return
      */

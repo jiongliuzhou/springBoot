@@ -12,7 +12,7 @@ import org.apache.ibatis.jdbc.SQL;
  */
 @Slf4j
 public class UserProvider {
-    private static final String TBALE_NAME="MEMBER_USER";
+    private static final String TABLE_NAME="LZ_MEMBER";
     /**
      * 获取查询用户列表sql
      * @param param
@@ -21,7 +21,7 @@ public class UserProvider {
     public String getUserList(MemberRequest param){
         SQL sql=new SQL();
         sql.SELECT("MEMBER_ID memberId","MEMBER_NAME memberName","EMAIL email","PHONE phone")
-                .FROM(TBALE_NAME);
+                .FROM(TABLE_NAME);
         sql.WHERE("STATUS=0");
         if(param.getMemberName()!=null && !"".equals(param.getMemberName())){
             sql.WHERE("MEMBER_NAME=#{memberName}");
@@ -38,7 +38,7 @@ public class UserProvider {
         log.info(param.toString());
         SQL sql=new SQL();
         sql.SELECT("MEMBER_ID memberId","MEMBER_NAME memberName","EMAIL email","PHONE phone")
-                .FROM(TBALE_NAME)
+                .FROM(TABLE_NAME)
                 .WHERE("STATUS=0")
                 .WHERE("MEMBER_ID=#{param.memberId}");
         return sql.toString();
@@ -52,7 +52,7 @@ public class UserProvider {
     public String insertUser(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
-        sql.INSERT_INTO(TBALE_NAME)
+        sql.INSERT_INTO(TABLE_NAME)
                 .INTO_COLUMNS("MEMBER_ID","MEMBER_NAME","EMAIL","PHONE","CREATE_TIME","STATUS")
                 .INTO_VALUES("#{memberId}","#{memberName}","#{email}","#{phone}","#{createTime}","#{status}");
         return sql.toString();
@@ -66,7 +66,7 @@ public class UserProvider {
     public String updateUser(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
-        sql.UPDATE(TBALE_NAME)
+        sql.UPDATE(TABLE_NAME)
                 .SET("MEMBER_NAME=#{memberName}","EMAIL=#{email}","PHONE=#{phone}","UPDATE_TIME=#{updateTime}")
                 .WHERE("MEMBER_ID=#{memberId}");
         return sql.toString();
@@ -80,7 +80,7 @@ public class UserProvider {
     public String deleteUser(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
-        sql.DELETE_FROM(TBALE_NAME)
+        sql.DELETE_FROM(TABLE_NAME)
                 .WHERE("MEMBER_ID=#{memberId}");
         return sql.toString();
     }
