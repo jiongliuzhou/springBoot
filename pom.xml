@@ -20,6 +20,8 @@
 		<module>api</module>
 		<!--dubbo服务提供者-->
 		<module>dubbo</module>
+		<!--认证服务-->
+		<module>authentication</module>
 	</modules>
 
 	<properties>
