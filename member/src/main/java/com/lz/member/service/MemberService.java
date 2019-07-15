@@ -5,43 +5,43 @@ import com.lz.member.bean.request.MemberRequest;
 import com.lz.member.bean.vo.MemberVO;
 
 /**
- *  用户管理业务层接口
+ *  会员管理业务层接口
  * @create 2019/5/21
  * @since 1.0.0
  */
-public interface UserService {
+public interface MemberService {
     /**
-     * 获取用户列表
+     * 获取会员列表
      * @param param
      * @return
      */
-    PageInfo<MemberVO> getUserList(MemberRequest param);
+    PageInfo<MemberVO> getMemberList(MemberRequest param);
 
     /**
-     * 获取用户详情
+     * 获取会员详情
      * @param param
      * @return
      */
-    MemberVO getUserInfo(MemberRequest param);
+    MemberVO getMemberInfo(MemberRequest param);
 
     /**
-     * 增加用户信息
+     * 增加会员信息
      * @param param
      * @return
      */
-    Integer insertUser(MemberRequest param);
+    Integer insertMember(MemberRequest param);
 
     /**
-     * 修改用户信息
+     * 修改会员信息
      * @param param
      * @return
      */
-    Integer updateUser(MemberRequest param);
+    Integer updateMember(MemberRequest param);
 
     /**
-     * 删除用户信息
+     * 删除会员信息
      * @param param
      * @return
      */
-    Integer deleteUser(MemberRequest param);
+    Integer deleteMember(MemberRequest param);
 }

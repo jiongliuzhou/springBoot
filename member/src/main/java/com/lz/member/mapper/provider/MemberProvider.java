@@ -6,19 +6,19 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 /**
- * 用户管理SQL提供类
+ * 会员管理SQL提供类
  * @create 2019/5/21
  * @since 1.0.0
  */
 @Slf4j
-public class UserProvider {
+public class MemberProvider {
     private static final String TABLE_NAME="LZ_MEMBER";
     /**
-     * 获取查询用户列表sql
+     * 获取查询会员列表sql
      * @param param
      * @return
      */
-    public String getUserList(MemberRequest param){
+    public String getMemberList(MemberRequest param){
         SQL sql=new SQL();
         sql.SELECT("MEMBER_ID memberId","MEMBER_NAME memberName","EMAIL email","PHONE phone")
                 .FROM(TABLE_NAME);
@@ -30,11 +30,11 @@ public class UserProvider {
     }
 
     /**
-     * 获取查询用户详情sql
+     * 获取查询会员详情sql
      * @param param
      * @return
      */
-    public String getUserInfo(@Param("param") MemberRequest param){
+    public String getMemberInfo(@Param("param") MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
         sql.SELECT("MEMBER_ID memberId","MEMBER_NAME memberName","EMAIL email","PHONE phone")
@@ -45,11 +45,11 @@ public class UserProvider {
     }
 
     /**
-     * 获取新增用户sql
+     * 获取新增会员sql
      * @param param
      * @return
      */
-    public String insertUser(MemberRequest param){
+    public String insertMember(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
         sql.INSERT_INTO(TABLE_NAME)
@@ -59,11 +59,11 @@ public class UserProvider {
     }
 
     /**
-     * 获取修改用户sql
+     * 获取修改会员sql
      * @param param
      * @return
      */
-    public String updateUser(MemberRequest param){
+    public String updateMember(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
         sql.UPDATE(TABLE_NAME)
@@ -73,11 +73,11 @@ public class UserProvider {
     }
 
     /**
-     * 获取删除用户sql
+     * 获取删除会员sql
      * @param param
      * @return
      */
-    public String deleteUser(MemberRequest param){
+    public String deleteMember(MemberRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
         sql.DELETE_FROM(TABLE_NAME)

@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.lz.base.util.base.ResultInvoke;
 import com.lz.member.bean.request.MemberRequest;
 import com.lz.member.bean.vo.MemberVO;
-import com.lz.member.service.UserService;
+import com.lz.member.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +21,9 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/memberController")
 @CrossOrigin
-public class UserController {
-    @Resource(name="userServiceImpl")
-    private UserService userService;
+public class MemberController {
+    @Resource(name="memberServiceImpl")
+    private MemberService memberService;
 
     /**
      * 获取会员信息列表
@@ -35,8 +35,8 @@ public class UserController {
     public Object getMemberList(@RequestBody MemberRequest param){
         Object obj;
         try {
-            PageInfo<MemberVO> userList = userService.getUserList(param);
-            obj= ResultInvoke.success(userList);
+            PageInfo<MemberVO> MemberList = memberService.getMemberList(param);
+            obj= ResultInvoke.success(MemberList);
         }catch (Exception e){
             obj= ResultInvoke.fail(e.getMessage());
         }
@@ -53,8 +53,8 @@ public class UserController {
     public Object getMemberInfo(@RequestBody MemberRequest param){
         Object obj;
         try {
-            MemberVO userInfo = userService.getUserInfo(param);
-            obj= ResultInvoke.success(userInfo);
+            MemberVO MemberInfo = memberService.getMemberInfo(param);
+            obj= ResultInvoke.success(MemberInfo);
         }catch (Exception e){
             obj= ResultInvoke.fail(e.getMessage());
         }
@@ -71,7 +71,7 @@ public class UserController {
     public Object insertMember(@RequestBody MemberRequest param){
         Object obj;
         try {
-            Integer k = userService.insertUser(param);
+            Integer k = memberService.insertMember(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -93,7 +93,7 @@ public class UserController {
     public Object updateMember(@RequestBody MemberRequest param){
         Object obj;
         try {
-            Integer k = userService.updateUser(param);
+            Integer k = memberService.updateMember(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -115,7 +115,7 @@ public class UserController {
     public Object deleteMember(@RequestBody MemberRequest param){
         Object obj;
         try {
-            Integer k = userService.deleteUser(param);
+            Integer k = memberService.deleteMember(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
