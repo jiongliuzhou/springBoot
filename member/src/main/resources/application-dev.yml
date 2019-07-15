@@ -1,6 +1,8 @@
 #配置启动端口
 server:
   port: 8080
+  servlet:
+    context-path: /member
 
 #数据源配置
 spring:
@@ -48,3 +50,13 @@ logging:
     org.springfromework: debug
   #file: app.log
 
+#资源认证配置
+security:
+  oauth2:
+    client:
+      client-id: MemberSystem
+      client-secret: 123456
+      access-token-uri: http://127.0.0.1:8089/oauth/token
+      user-authorization-uri: http://127.0.0.1:8089/oauth/authorize
+    resource:
+      user-info-uri: http://127.0.0.1:8089/user/me
