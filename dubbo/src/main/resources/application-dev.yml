@@ -31,3 +31,10 @@ logging:
     org.springfromework: debug
   #file: app.log
 
+#dubbo配置
+dubbo:
+  application:
+    name: provider
+  registry:
+    address: zookeeper://127.0.0.1:2181
+
