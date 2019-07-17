@@ -2,9 +2,11 @@ package com.lz.goods.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lz.base.util.base.ResultInvoke;
+import com.lz.base.util.exception.ExceptionHelper;
 import com.lz.goods.bean.request.GoodRequest;
 import com.lz.goods.bean.vo.GoodVO;
 import com.lz.goods.service.GoodService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/goodController")
 @CrossOrigin
+@Slf4j
 public class GoodController {
     @Resource(name="goodServiceImpl")
     private GoodService goodService;
@@ -34,9 +37,10 @@ public class GoodController {
     public Object getGoodList(GoodRequest param){
         Object obj;
         try {
-            PageInfo<GoodVO> GoodList = goodService.getGoodList(param);
-            obj= ResultInvoke.success(GoodList);
+            PageInfo<GoodVO> goodList = goodService.getGoodList(param);
+            obj= ResultInvoke.success(goodList);
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -52,9 +56,10 @@ public class GoodController {
     public Object getGoodInfo(GoodRequest param){
         Object obj;
         try {
-            GoodVO GoodInfo = goodService.getGoodInfo(param);
-            obj= ResultInvoke.success(GoodInfo);
+            GoodVO goodInfo = goodService.getGoodInfo(param);
+            obj= ResultInvoke.success(goodInfo);
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -77,6 +82,7 @@ public class GoodController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -99,6 +105,7 @@ public class GoodController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -121,6 +128,7 @@ public class GoodController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
