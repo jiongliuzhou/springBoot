@@ -7,7 +7,6 @@ import com.lz.member.bean.vo.MemberVO;
 import com.lz.member.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +31,7 @@ public class MemberController {
      */
     @RequestMapping("/getMemberList")
     @ResponseBody
-    public Object getMemberList(@RequestBody MemberRequest param){
+    public Object getMemberList(MemberRequest param){
         Object obj;
         try {
             PageInfo<MemberVO> MemberList = memberService.getMemberList(param);
@@ -50,7 +49,7 @@ public class MemberController {
      */
     @RequestMapping("/getMemberInfo")
     @ResponseBody
-    public Object getMemberInfo(@RequestBody MemberRequest param){
+    public Object getMemberInfo(MemberRequest param){
         Object obj;
         try {
             MemberVO MemberInfo = memberService.getMemberInfo(param);
@@ -68,7 +67,7 @@ public class MemberController {
      */
     @RequestMapping("/insertMember")
     @ResponseBody
-    public Object insertMember(@RequestBody MemberRequest param){
+    public Object insertMember(MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.insertMember(param);
@@ -90,7 +89,7 @@ public class MemberController {
      */
     @RequestMapping("/updateMember")
     @ResponseBody
-    public Object updateMember(@RequestBody MemberRequest param){
+    public Object updateMember(MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.updateMember(param);
@@ -112,7 +111,7 @@ public class MemberController {
      */
     @RequestMapping("/deleteMember")
     @ResponseBody
-    public Object deleteMember(@RequestBody MemberRequest param){
+    public Object deleteMember(MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.deleteMember(param);
