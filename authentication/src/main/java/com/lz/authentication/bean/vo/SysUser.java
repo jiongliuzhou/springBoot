@@ -1,6 +1,8 @@
-package com.lz.authentication.bean;
+package com.lz.authentication.bean.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -11,11 +13,13 @@ import java.util.List;
  * @since 1.0.0
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SysUser {
     /**
      * 用户编号
      */
-    private String userCode;
+    private String userId;
 
     /**
      * 用户名
@@ -28,17 +32,12 @@ public class SysUser {
     private String password;
 
     /**
-     * 盐
+     * 手机号
      */
-    private String salt;
+    private String phone;
 
     /**
      * 用户角色
      */
     private List<SysRole> roleList;
-
-    public SysUser(String username, String password) {
-        this.userName = username;
-        this.password = password;
-    }
 }

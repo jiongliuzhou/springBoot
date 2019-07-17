@@ -1,8 +1,8 @@
 package com.lz.authentication.support;
 
-import com.lz.authentication.bean.SysPermission;
-import com.lz.authentication.bean.SysRole;
-import com.lz.authentication.bean.SysUser;
+import com.lz.authentication.bean.vo.SysPermission;
+import com.lz.authentication.bean.vo.SysRole;
+import com.lz.authentication.bean.vo.SysUser;
 import com.lz.authentication.service.UserService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -38,7 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (SysRole role : sysUser.getRoleList()) {
             for (SysPermission permission : role.getPermissionList()) {
-                authorities.add(new SimpleGrantedAuthority(permission.getCode()));
+                authorities.add(new SimpleGrantedAuthority(permission.getPermissionId()));
             }
         }
         return new User(sysUser.getUserName(), sysUser.getPassword(), authorities);

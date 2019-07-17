@@ -16,6 +16,13 @@
 	</parent>
 
 	<dependencies>
+		<!--基础组件库-->
+		<dependency>
+			<groupId>com.lz.base</groupId>
+			<artifactId>base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!--单点登录依赖包-->
 		<dependency>
 			<groupId>org.springframework.security.oauth</groupId>

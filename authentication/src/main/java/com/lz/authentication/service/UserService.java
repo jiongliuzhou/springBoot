@@ -1,7 +1,7 @@
 package com.lz.authentication.service;
 
 
-import com.lz.authentication.bean.SysUser;
+import com.lz.authentication.bean.vo.SysUser;
 
 /**
  *  用户权限管理

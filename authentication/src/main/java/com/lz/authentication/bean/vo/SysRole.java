@@ -1,6 +1,8 @@
-package com.lz.authentication.bean;
+package com.lz.authentication.bean.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -11,13 +13,13 @@ import java.util.List;
  * @since 1.0.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysRole {
-    private Long id;
-
     /**
      * 角色编码
      */
-    private String roleCode;
+    private String roleId;
 
     /**
      * 角色名称
@@ -25,14 +27,8 @@ public class SysRole {
     private String roleName;
 
     /**
-     * 角色拥有的权限
+     * 角色权限列表
      */
     private List<SysPermission> permissionList;
-    public SysRole() {
-    }
 
-    public SysRole(String roleCode, String roleName) {
-        this.roleCode = roleCode;
-        this.roleName = roleName;
-    }
 }
