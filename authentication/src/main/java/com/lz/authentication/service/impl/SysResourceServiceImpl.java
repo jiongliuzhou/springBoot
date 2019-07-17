@@ -7,6 +7,7 @@ import com.lz.authentication.bean.vo.SysResource;
 import com.lz.authentication.dao.SysResourceMapper;
 import com.lz.authentication.service.SysResourceService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @since 1.0.0
  */
 @Service("sysResourceServiceImpl")
+@Transactional
 public class SysResourceServiceImpl implements SysResourceService {
     @Resource
     private SysResourceMapper sysResourceMapper;

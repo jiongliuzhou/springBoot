@@ -1,9 +1,9 @@
 package com.lz.authentication.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.lz.authentication.bean.request.UserRequest;
-import com.lz.authentication.bean.vo.SysUser;
-import com.lz.authentication.service.SysUserService;
+import com.lz.authentication.bean.request.PermissionRequest;
+import com.lz.authentication.bean.vo.SysPermission;
+import com.lz.authentication.service.SysPermissionService;
 import com.lz.base.util.base.ResultInvoke;
 import com.lz.base.util.exception.ExceptionHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- *  用户管理
+ *  权限管理
  * @create 2019/5/21
  * @since 1.0.0
  */
 @Controller
-@RequestMapping("/sysUserController")
+@RequestMapping("/sysPermissionController")
 @CrossOrigin
 @Slf4j
-public class SysUserController {
-    @Resource(name="sysUserServiceImpl")
-    private SysUserService sysUserService;
+public class SysPermissionController {
+    @Resource(name="sysPermissionServiceImpl")
+    private SysPermissionService sysPermissionService;
 
     /**
-     * 获取用户信息列表
+     * 获取权限信息列表
      * @param param
      * @return
      */
-    @RequestMapping("/getSysUserList")
+    @RequestMapping("/getSysPermissionList")
     @ResponseBody
-    public Object getSysUserList(UserRequest param){
+    public Object getSysPermissionList(PermissionRequest param){
         Object obj;
         try {
-            PageInfo<SysUser> sysUserList = sysUserService.getUserList(param);
-            obj= ResultInvoke.success(sysUserList);
+            PageInfo<SysPermission> sysPermissionList = sysPermissionService.getPermissionList(param);
+            obj= ResultInvoke.success(sysPermissionList);
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
@@ -47,17 +47,17 @@ public class SysUserController {
     }
 
     /**
-     * 获取用户详情
+     * 获取权限详情
      * @param param
      * @return
      */
-    @RequestMapping("/getSysUserInfo")
+    @RequestMapping("/getSysPermissionInfo")
     @ResponseBody
-    public Object getSysUserInfo(UserRequest param){
+    public Object getSysPermissionInfo(PermissionRequest param){
         Object obj;
         try {
-            SysUser sysUserInfo = sysUserService.getUserInfo(param);
-            obj= ResultInvoke.success(sysUserInfo);
+            SysPermission sysPermissionInfo = sysPermissionService.getPermissionInfo(param);
+            obj= ResultInvoke.success(sysPermissionInfo);
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
@@ -66,16 +66,16 @@ public class SysUserController {
     }
 
     /**
-     * 新增用户信息
+     * 新增权限信息
      * @param param
      * @return
      */
-    @RequestMapping("/insertSysUser")
+    @RequestMapping("/insertSysPermission")
     @ResponseBody
-    public Object insertSysUser(UserRequest param){
+    public Object insertSysPermission(PermissionRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.insertUser(param);
+            Integer k = sysPermissionService.insertPermission(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -89,16 +89,16 @@ public class SysUserController {
     }
 
     /**
-     * 修改用户信息
+     * 修改权限信息
      * @param param
      * @return
      */
-    @RequestMapping("/updateSysUser")
+    @RequestMapping("/updateSysPermission")
     @ResponseBody
-    public Object updateSysUser(UserRequest param){
+    public Object updateSysPermission(PermissionRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.updateUser(param);
+            Integer k = sysPermissionService.updatePermission(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -112,16 +112,16 @@ public class SysUserController {
     }
 
     /**
-     * 删除用户信息
+     * 删除权限信息
      * @param param
      * @return
      */
-    @RequestMapping("/deleteSysUser")
+    @RequestMapping("/deleteSysPermission")
     @ResponseBody
-    public Object deleteSysUser(UserRequest param){
+    public Object deleteSysPermission(PermissionRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.deleteUser(param);
+            Integer k = sysPermissionService.deletePermission(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{

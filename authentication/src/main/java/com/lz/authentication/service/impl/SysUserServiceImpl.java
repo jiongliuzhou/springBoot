@@ -16,6 +16,7 @@ import com.lz.authentication.dao.SysUserMapper;
 import com.lz.authentication.dao.SysUserRoleMapper;
 import com.lz.authentication.service.SysUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Service("sysUserServiceImpl")
+@Transactional
 public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserMapper sysUserMapper;

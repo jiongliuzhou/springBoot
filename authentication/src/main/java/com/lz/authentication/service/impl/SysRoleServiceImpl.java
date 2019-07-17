@@ -7,6 +7,7 @@ import com.lz.authentication.bean.vo.SysRole;
 import com.lz.authentication.dao.*;
 import com.lz.authentication.service.SysRoleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @since 1.0.0
  */
 @Service("sysRoleServiceImpl")
+@Transactional
 public class SysRoleServiceImpl implements SysRoleService {
     @Resource
     private SysRoleMapper sysRoleMapper;

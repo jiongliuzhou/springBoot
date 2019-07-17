@@ -7,6 +7,8 @@ import com.lz.authentication.bean.vo.SysPermission;
 import com.lz.authentication.dao.SysPermissionMapper;
 import com.lz.authentication.service.SysPermissionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 
 /**
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
  * @since 1.0.0
  */
 @Service("sysPermissionServiceImpl")
+@Transactional
 public class SysPermissionServiceImpl implements SysPermissionService {
     @Resource
     private SysPermissionMapper sysPermissionMapper;

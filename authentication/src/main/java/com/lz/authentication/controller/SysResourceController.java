@@ -1,9 +1,9 @@
 package com.lz.authentication.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.lz.authentication.bean.request.UserRequest;
-import com.lz.authentication.bean.vo.SysUser;
-import com.lz.authentication.service.SysUserService;
+import com.lz.authentication.bean.request.ResourceRequest;
+import com.lz.authentication.bean.vo.SysResource;
+import com.lz.authentication.service.SysResourceService;
 import com.lz.base.util.base.ResultInvoke;
 import com.lz.base.util.exception.ExceptionHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- *  用户管理
+ *  资源管理
  * @create 2019/5/21
  * @since 1.0.0
  */
 @Controller
-@RequestMapping("/sysUserController")
+@RequestMapping("/sysResourceController")
 @CrossOrigin
 @Slf4j
-public class SysUserController {
-    @Resource(name="sysUserServiceImpl")
-    private SysUserService sysUserService;
+public class SysResourceController {
+    @Resource(name="sysResourceServiceImpl")
+    private SysResourceService sysResourceService;
 
     /**
-     * 获取用户信息列表
+     * 获取资源信息列表
      * @param param
      * @return
      */
-    @RequestMapping("/getSysUserList")
+    @RequestMapping("/getSysResourceList")
     @ResponseBody
-    public Object getSysUserList(UserRequest param){
+    public Object getSysResourceList(ResourceRequest param){
         Object obj;
         try {
-            PageInfo<SysUser> sysUserList = sysUserService.getUserList(param);
-            obj= ResultInvoke.success(sysUserList);
+            PageInfo<SysResource> sysResourceList = sysResourceService.getResourceList(param);
+            obj= ResultInvoke.success(sysResourceList);
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
@@ -47,17 +47,17 @@ public class SysUserController {
     }
 
     /**
-     * 获取用户详情
+     * 获取资源详情
      * @param param
      * @return
      */
-    @RequestMapping("/getSysUserInfo")
+    @RequestMapping("/getSysResourceInfo")
     @ResponseBody
-    public Object getSysUserInfo(UserRequest param){
+    public Object getSysResourceInfo(ResourceRequest param){
         Object obj;
         try {
-            SysUser sysUserInfo = sysUserService.getUserInfo(param);
-            obj= ResultInvoke.success(sysUserInfo);
+            SysResource sysResourceInfo = sysResourceService.getResourceInfo(param);
+            obj= ResultInvoke.success(sysResourceInfo);
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
@@ -66,16 +66,16 @@ public class SysUserController {
     }
 
     /**
-     * 新增用户信息
+     * 新增资源信息
      * @param param
      * @return
      */
-    @RequestMapping("/insertSysUser")
+    @RequestMapping("/insertSysResource")
     @ResponseBody
-    public Object insertSysUser(UserRequest param){
+    public Object insertSysResource(ResourceRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.insertUser(param);
+            Integer k = sysResourceService.insertResource(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -89,16 +89,16 @@ public class SysUserController {
     }
 
     /**
-     * 修改用户信息
+     * 修改资源信息
      * @param param
      * @return
      */
-    @RequestMapping("/updateSysUser")
+    @RequestMapping("/updateSysResource")
     @ResponseBody
-    public Object updateSysUser(UserRequest param){
+    public Object updateSysResource(ResourceRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.updateUser(param);
+            Integer k = sysResourceService.updateResource(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
@@ -112,16 +112,16 @@ public class SysUserController {
     }
 
     /**
-     * 删除用户信息
+     * 删除资源信息
      * @param param
      * @return
      */
-    @RequestMapping("/deleteSysUser")
+    @RequestMapping("/deleteSysResource")
     @ResponseBody
-    public Object deleteSysUser(UserRequest param){
+    public Object deleteSysResource(ResourceRequest param){
         Object obj;
         try {
-            Integer k = sysUserService.deleteUser(param);
+            Integer k = sysResourceService.deleteResource(param);
             if(k>0){
                 obj= ResultInvoke.success();
             }else{
