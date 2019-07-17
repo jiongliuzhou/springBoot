@@ -26,6 +26,8 @@ import java.util.Map;
 public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar, EnvironmentAware {
     private Logger logger = LoggerFactory.getLogger(DynamicDataSourceRegister.class);
 
+    private static final String PARAM="dataSource";
+
     /**
      * 指定默认数据源
      */
@@ -49,8 +51,8 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         //添加默认数据源
-        targetDataSources.put("dataSource", this.defaultDataSource);
-        DynamicDataSourceContextHolder.dataSourceIds.add("dataSource");
+        targetDataSources.put(PARAM, this.defaultDataSource);
+        DynamicDataSourceContextHolder.dataSourceIds.add(PARAM);
         //添加其他数据源
         targetDataSources.putAll(slaveDataSources);
         for (String key : slaveDataSources.keySet()) {
@@ -64,7 +66,7 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
         mpv.addPropertyValue("defaultTargetDataSource", defaultDataSource);
         mpv.addPropertyValue("targetDataSources", targetDataSources);
         //注册BeanDefinitionRegistry
-        beanDefinitionRegistry.registerBeanDefinition("dataSource", beanDefinition);
+        beanDefinitionRegistry.registerBeanDefinition(PARAM, beanDefinition);
         logger.info("Dynamic DataSource Registry");
     }
 

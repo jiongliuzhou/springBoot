@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @Transactional
 public class GoodServiceImpl implements GoodService {
     @Resource
-    private GoodMapper GoodMapper;
+    private GoodMapper goodMapper;
 
     /**
      * 获取商品信息列表
@@ -31,7 +31,7 @@ public class GoodServiceImpl implements GoodService {
      */
     public PageInfo<GoodVO> getGoodList(GoodRequest param) {
         PageHelper.startPage(param.getPageNum(),param.getPageSize());
-        return new PageInfo<>(GoodMapper.getGoodList(param));
+        return new PageInfo<>(goodMapper.getGoodList(param));
     }
 
     /**
@@ -40,7 +40,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     public GoodVO getGoodInfo(GoodRequest param) {
-        return GoodMapper.getGoodInfo(param);
+        return goodMapper.getGoodInfo(param);
     }
 
     /**
@@ -52,7 +52,7 @@ public class GoodServiceImpl implements GoodService {
         param.setGoodId(UUIDHelper.get32UUID());
         param.setCreateTime(DateHelper.getNow());
         param.setStatus(ConstantStr.FAIL_CODE.getKey());
-        return GoodMapper.insertGood(param);
+        return goodMapper.insertGood(param);
     }
 
     /**
@@ -62,7 +62,7 @@ public class GoodServiceImpl implements GoodService {
      */
     public Integer updateGood(GoodRequest param) {
         param.setUpdateTime(DateHelper.getNow());
-        return GoodMapper.updateGood(param);
+        return goodMapper.updateGood(param);
     }
 
     /**
@@ -71,7 +71,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     public Integer deleteGood(GoodRequest param) {
-        return GoodMapper.deleteGood(param);
+        return goodMapper.deleteGood(param);
     }
 
 }
