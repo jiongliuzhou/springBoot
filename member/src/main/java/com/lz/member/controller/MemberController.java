@@ -2,9 +2,11 @@ package com.lz.member.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lz.base.util.base.ResultInvoke;
+import com.lz.base.util.exception.ExceptionHelper;
 import com.lz.member.bean.request.MemberRequest;
 import com.lz.member.bean.vo.MemberVO;
 import com.lz.member.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/memberController")
 @CrossOrigin
+@Slf4j
 public class MemberController {
     @Resource(name="memberServiceImpl")
     private MemberService memberService;
@@ -34,9 +37,10 @@ public class MemberController {
     public Object getMemberList(MemberRequest param){
         Object obj;
         try {
-            PageInfo<MemberVO> MemberList = memberService.getMemberList(param);
-            obj= ResultInvoke.success(MemberList);
+            PageInfo<MemberVO> memberList = memberService.getMemberList(param);
+            obj= ResultInvoke.success(memberList);
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -52,9 +56,10 @@ public class MemberController {
     public Object getMemberInfo(MemberRequest param){
         Object obj;
         try {
-            MemberVO MemberInfo = memberService.getMemberInfo(param);
-            obj= ResultInvoke.success(MemberInfo);
+            MemberVO memberInfo = memberService.getMemberInfo(param);
+            obj= ResultInvoke.success(memberInfo);
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -77,6 +82,7 @@ public class MemberController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -99,6 +105,7 @@ public class MemberController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
@@ -121,6 +128,7 @@ public class MemberController {
                 obj= ResultInvoke.fail();
             }
         }catch (Exception e){
+            log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
         }
         return obj;
