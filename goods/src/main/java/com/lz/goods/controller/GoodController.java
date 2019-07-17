@@ -7,7 +7,6 @@ import com.lz.goods.bean.vo.GoodVO;
 import com.lz.goods.service.GoodService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +31,7 @@ public class GoodController {
      */
     @RequestMapping("/getGoodList")
     @ResponseBody
-    public Object getGoodList(@RequestBody GoodRequest param){
+    public Object getGoodList(GoodRequest param){
         Object obj;
         try {
             PageInfo<GoodVO> GoodList = goodService.getGoodList(param);
@@ -50,7 +49,7 @@ public class GoodController {
      */
     @RequestMapping("/getGoodInfo")
     @ResponseBody
-    public Object getGoodInfo(@RequestBody GoodRequest param){
+    public Object getGoodInfo(GoodRequest param){
         Object obj;
         try {
             GoodVO GoodInfo = goodService.getGoodInfo(param);
@@ -68,7 +67,7 @@ public class GoodController {
      */
     @RequestMapping("/insertGood")
     @ResponseBody
-    public Object insertGood(@RequestBody GoodRequest param){
+    public Object insertGood(GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.insertGood(param);
@@ -90,7 +89,7 @@ public class GoodController {
      */
     @RequestMapping("/updateGood")
     @ResponseBody
-    public Object updateGood(@RequestBody GoodRequest param){
+    public Object updateGood(GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.updateGood(param);
@@ -112,7 +111,7 @@ public class GoodController {
      */
     @RequestMapping("/deleteGood")
     @ResponseBody
-    public Object deleteGood(@RequestBody GoodRequest param){
+    public Object deleteGood(GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.deleteGood(param);
