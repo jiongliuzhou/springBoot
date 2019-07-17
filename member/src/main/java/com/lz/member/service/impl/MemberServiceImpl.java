@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @Transactional
 public class MemberServiceImpl implements MemberService {
     @Resource
-    private MemberMapper MemberMapper;
+    private MemberMapper memberMapper;
 
     /**
      * 获取用户信息列表
@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
      */
     public PageInfo<MemberVO> getMemberList(MemberRequest param) {
         PageHelper.startPage(param.getPageNum(),param.getPageSize());
-        return new PageInfo<>(MemberMapper.getMemberList(param));
+        return new PageInfo<>(memberMapper.getMemberList(param));
     }
 
     /**
@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     public MemberVO getMemberInfo(MemberRequest param) {
-        return MemberMapper.getMemberInfo(param);
+        return memberMapper.getMemberInfo(param);
     }
 
     /**
@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
         param.setMemberId(UUIDHelper.get32UUID());
         param.setCreateTime(DateHelper.getNow());
         param.setStatus(ConstantStr.FAIL_CODE.getKey());
-        return MemberMapper.insertMember(param);
+        return memberMapper.insertMember(param);
     }
 
     /**
@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
      */
     public Integer updateMember(MemberRequest param) {
         param.setUpdateTime(DateHelper.getNow());
-        return MemberMapper.updateMember(param);
+        return memberMapper.updateMember(param);
     }
 
     /**
@@ -71,7 +71,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     public Integer deleteMember(MemberRequest param) {
-        return MemberMapper.deleteMember(param);
+        return memberMapper.deleteMember(param);
     }
 
 }
