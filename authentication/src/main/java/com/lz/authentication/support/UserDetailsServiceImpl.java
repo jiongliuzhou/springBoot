@@ -3,7 +3,7 @@ package com.lz.authentication.support;
 import com.lz.authentication.bean.vo.SysPermission;
 import com.lz.authentication.bean.vo.SysRole;
 import com.lz.authentication.bean.vo.SysUser;
-import com.lz.authentication.service.UserService;
+import com.lz.authentication.service.SysUserService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +23,8 @@ import java.util.List;
  */
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Resource(name="userServiceImpl")
-    private UserService userService;
+    @Resource(name="sysUserServiceImpl")
+    private SysUserService userService;
 
     /**
      * 授权的时候是对角色授权，而认证的时候应该基于资源，而不是角色，因为资源是不变的，而用户的角色是会变的

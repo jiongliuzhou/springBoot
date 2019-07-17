@@ -11,7 +11,7 @@ import java.security.Principal;
  * @since 1.0.0
  */
 @RestController
-public class UserController {
+public class SysUserController {
     @GetMapping("/user/me")
     public Principal user(Principal principal) {
         return principal;
