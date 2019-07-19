@@ -60,3 +60,10 @@ security:
       user-authorization-uri: http://127.0.0.1:8089/oauth/authorize
     resource:
       user-info-uri: http://127.0.0.1:8089/user/me
+
+#dubbo配置
+dubbo:
+  application:
+    name: member
+  registry:
+    address: zookeeper://127.0.0.1:2181
