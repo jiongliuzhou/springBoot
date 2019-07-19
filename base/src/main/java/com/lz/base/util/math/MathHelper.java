@@ -10,6 +10,9 @@ import java.math.RoundingMode;
  * @since 1.0.0
  */
 public class MathHelper {
+    private  MathHelper(){
+
+    }
     /**
      * 加法
      * @param one 加数1
@@ -76,12 +79,5 @@ public class MathHelper {
             result=result.setScale(scale[0], RoundingMode.HALF_UP);
         }
         return result.toString();
-    }
-
-    public static void main(String[] args){
-        System.out.println(add("1","2",2));
-        System.out.println(subtract("1","2",2));
-        System.out.println(multiply("1","2",2));
-        System.out.println(divide("1","2",2));
     }
 }
