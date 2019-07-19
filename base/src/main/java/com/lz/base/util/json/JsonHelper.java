@@ -55,4 +55,13 @@ public class JsonHelper {
     public static <T> T get(String json,Class<T> clazz){
         return JSONObject.parseObject(json, clazz);
     }
+
+    /**
+     * 将对象转化为json字符串
+     * @param obj
+     * @return
+     */
+    public static String toJSON(Object obj){
+        return JSONObject.toJSON(obj).toString();
+    }
 }
