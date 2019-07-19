@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @RunWith(SpringRunner.class)
 @Slf4j
 public class MemberControllerTest {
-    @Resource
+    @Resource(name="memberServiceImpl")
     private MemberService memberService;
 
     /**
