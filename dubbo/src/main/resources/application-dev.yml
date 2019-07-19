@@ -1,6 +1,6 @@
 #配置启动端口
 server:
-  port: 8080
+  port: 8090
 
 #数据源配置
 spring:
@@ -34,7 +34,7 @@ logging:
 #dubbo配置
 dubbo:
   application:
-    name: provider
+    name: dubbo
   registry:
     address: zookeeper://127.0.0.1:2181
 
