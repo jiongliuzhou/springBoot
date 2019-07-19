@@ -6,6 +6,7 @@ import com.lz.base.util.date.DateHelper;
 import com.lz.base.util.uuid.UUIDHelper;
 import com.lz.goods.bean.request.GoodRequest;
 import com.lz.goods.bean.vo.GoodVO;
+import com.lz.goods.config.TargetDataSource;
 import com.lz.goods.mapper.GoodMapper;
 import com.lz.goods.service.GoodService;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class GoodServiceImpl implements GoodService {
      * @param param
      * @return
      */
+    @TargetDataSource(name="dss")
     public Integer insertGood(GoodRequest param) {
         param.setGoodId(UUIDHelper.get32UUID());
         param.setCreateTime(DateHelper.getNow());
@@ -60,6 +62,7 @@ public class GoodServiceImpl implements GoodService {
      * @param param
      * @return
      */
+    @TargetDataSource(name="dss")
     public Integer updateGood(GoodRequest param) {
         param.setUpdateTime(DateHelper.getNow());
         return goodMapper.updateGood(param);
@@ -70,6 +73,7 @@ public class GoodServiceImpl implements GoodService {
      * @param param
      * @return
      */
+    @TargetDataSource(name="dss")
     public Integer deleteGood(GoodRequest param) {
         return goodMapper.deleteGood(param);
     }

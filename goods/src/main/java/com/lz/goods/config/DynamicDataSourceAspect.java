@@ -26,7 +26,7 @@ public class DynamicDataSourceAspect {
     public void changeDataSource(JoinPoint point, TargetDataSource ds){
         String dsId = ds.name();
         if (!DynamicDataSourceContextHolder.containsDataSource(dsId)) {
-            log.error("数据源["+ds.name()+"]不存在，使用默认数据源 > "+point.getSignature());
+            log.debug("数据源["+ds.name()+"]不存在，使用默认数据源 > "+point.getSignature());
         } else {
             log.debug("Use DataSource : "+ds.name()+" >"+point.getSignature());
             DynamicDataSourceContextHolder.setDataSourceType(ds.name());
