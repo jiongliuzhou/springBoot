@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<body>
+    <div>
+        <button onClick="logout()" class="btn btn-primary">登出</button>
+    </div>
+</body>
+</html>
+<script>
+    function logout() {
+        $.post("/logout", function() {
+
+        })
+        return true;
+    }
+</script>
