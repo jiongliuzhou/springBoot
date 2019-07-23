@@ -29,7 +29,7 @@ public class SysResourceServiceImpl implements SysResourceService {
      */
     @Override
     public PageInfo<SysResource> getResourceList(ResourceRequest param){
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(sysResourceMapper.getResourceList(param));
     }
 

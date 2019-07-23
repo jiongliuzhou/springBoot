@@ -89,7 +89,7 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public PageInfo<SysUser> getUserList(UserRequest param){
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(sysUserMapper.getUserList(param));
     }
 

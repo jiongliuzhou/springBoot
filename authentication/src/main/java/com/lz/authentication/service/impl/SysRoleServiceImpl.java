@@ -29,7 +29,7 @@ public class SysRoleServiceImpl implements SysRoleService {
      */
     @Override
     public PageInfo<SysRole> getRoleList(RoleRequest param){
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(sysRoleMapper.getRoleList(param));
     }
 

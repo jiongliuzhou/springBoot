@@ -28,7 +28,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
      */
     @Override
     public PageInfo<SysPermission> getPermissionList(PermissionRequest param){
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(sysPermissionMapper.getPermissionList(param));
     }
 
