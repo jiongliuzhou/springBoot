@@ -16,6 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageData {
-    private int total;
+    private long total;
     private List<?> rows;
 }
