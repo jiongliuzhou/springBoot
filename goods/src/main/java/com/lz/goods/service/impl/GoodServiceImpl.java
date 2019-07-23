@@ -31,7 +31,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     public PageInfo<GoodVO> getGoodList(GoodRequest param) {
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(goodMapper.getGoodList(param));
     }
 

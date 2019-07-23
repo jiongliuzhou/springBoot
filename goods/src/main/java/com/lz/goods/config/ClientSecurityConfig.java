@@ -21,7 +21,10 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login**")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                //关闭默认csrf认证
+                .csrf().disable();
     }
 
 }

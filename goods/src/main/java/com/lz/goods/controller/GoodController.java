@@ -1,6 +1,7 @@
 package com.lz.goods.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.lz.base.util.base.PageData;
 import com.lz.base.util.base.ResultInvoke;
 import com.lz.base.util.exception.ExceptionHelper;
 import com.lz.goods.bean.request.GoodRequest;
@@ -9,6 +10,7 @@ import com.lz.goods.service.GoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,11 +36,11 @@ public class GoodController {
      */
     @RequestMapping("/getGoodList")
     @ResponseBody
-    public Object getGoodList(GoodRequest param){
+    public Object getGoodList(@RequestBody GoodRequest param){
         Object obj;
         try {
             PageInfo<GoodVO> goodList = goodService.getGoodList(param);
-            obj= ResultInvoke.success(goodList);
+            obj=new PageData(goodList.getTotal(),goodList.getList());
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());

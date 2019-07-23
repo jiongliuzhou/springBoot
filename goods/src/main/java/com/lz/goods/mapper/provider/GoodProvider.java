@@ -24,7 +24,8 @@ public class GoodProvider {
                 .FROM(TABLE_NAME);
         sql.WHERE("STATUS=0");
         if(param.getGoodName()!=null && !"".equals(param.getGoodName())){
-            sql.WHERE("GOOD_NAME=#{goodName}");
+            param.setGoodName("%"+param.getGoodName()+"%");
+            sql.WHERE("GOOD_NAME like #{goodName}");
         }
         return sql.toString();
     }
