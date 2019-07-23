@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     public PageInfo<MemberVO> getMemberList(MemberRequest param) {
-        PageHelper.startPage(param.getPageNum(),param.getPageSize());
+        PageHelper.startPage(param.getPageNumber(),param.getPageSize());
         return new PageInfo<>(memberMapper.getMemberList(param));
     }
 
