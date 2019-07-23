@@ -24,7 +24,8 @@ public class MemberProvider {
                 .FROM(TABLE_NAME);
         sql.WHERE("STATUS=0");
         if(param.getMemberName()!=null && !"".equals(param.getMemberName())){
-            sql.WHERE("MEMBER_NAME=#{memberName}");
+            param.setMemberName("%"+param.getMemberName()+"%");
+            sql.WHERE("MEMBER_NAME like #{memberName}");
         }
         return sql.toString();
     }

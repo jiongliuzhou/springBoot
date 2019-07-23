@@ -1,6 +1,7 @@
 package com.lz.member.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.lz.base.util.base.PageData;
 import com.lz.base.util.base.ResultInvoke;
 import com.lz.base.util.exception.ExceptionHelper;
 import com.lz.member.bean.request.MemberRequest;
@@ -9,6 +10,7 @@ import com.lz.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,11 +36,11 @@ public class MemberController {
      */
     @RequestMapping("/getMemberList")
     @ResponseBody
-    public Object getMemberList(MemberRequest param){
+    public Object getMemberList(@RequestBody MemberRequest param){
         Object obj;
         try {
             PageInfo<MemberVO> memberList = memberService.getMemberList(param);
-            obj= ResultInvoke.success(memberList);
+            obj= new PageData(memberList.getTotal(),memberList.getList());
         }catch (Exception e){
             log.error(ExceptionHelper.dealException(e));
             obj= ResultInvoke.fail(e.getMessage());
