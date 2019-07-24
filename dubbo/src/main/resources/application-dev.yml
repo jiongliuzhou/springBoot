@@ -24,6 +24,17 @@ spring:
   freemarker:
     cache: false #页面不加载缓存，修改即时生效
 
+#自定义数据源
+custom:
+  datasource:
+    names: base
+    base:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/base?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: root
+
 #日志配置
 logging:
   level:
