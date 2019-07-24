@@ -3,28 +3,81 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>会员管理系统</title>
+    <title>商品管理系统</title>
     <!--必须的css引用-->
     <link href="Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
     <link href="Content/bootstrap-table/bootstrap-table.min.css"  rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/sidebar-menu/sidebar-menu.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-rtl.min.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-skins.min.css" rel="stylesheet" />
+    <link href="Content/toastr/toastr.min.css" rel="stylesheet" />
     <style type="text/css">
         /*滚动条样式*/
         ::-webkit-scrollbar-track {
-                background-color: #f5f5f5;
-            }
-    
-            ::-webkit-scrollbar {
-                width: 6px;
-                background-color: #f5f5f5;
-            }
-    
-            ::-webkit-scrollbar-thumb {
-                background-color: #999;
-            }
-        </style>
+            background-color: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            background-color: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #999;
+        }
+    </style>
 </head>
 <body>
+<div class="navbar navbar-default" id="navbar" style="margin-bottom: 0px;">
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf"></i>
+                    会员管理系统
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+
+                <li class="light-blue" style="height:50px;margin-right:-20px;">
+
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="Content/ace/avatars/avatar2.png" alt="Admin's Photo" />
+                        <span class="user-info">
+                                <small>欢迎光临,</small>
+                                <span class="user-info-username"></span>
+                            </span>
+                        <i class="icon-caret-down"></i>
+                    </a>
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#" onclick="getCurrentInfo()">
+                                <i class="icon-user"></i>
+                                个人信息
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" onclick="logout()">
+                                <i class="icon-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="main-container" id="main-container">
     <div class="panel-body" style="padding-bottom:0px;">
         <div id="toolbar">
             <form class="form-inline">
@@ -74,159 +127,235 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
                     <button type="button" id="save" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                 </div>
-                
+
             </div>
         </div>
     </div>
 
-    <!--必须的js文件-->
-    <script src="Content/jquery-1.9.1.min.js"></script>
-    <script src="Content/bootstrap/js/bootstrap.min.js"></script>
-    <script src="Content/bootstrap3-editable/js/bootstrap-editable.js"></script>
-    <script src="Content/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="Content/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script src="Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //表格的初始化
-            $('#tb_user').bootstrapTable({
-                url:'memberController/getMemberList',
-                method: 'post',                     //请求方式（*）
-                toolbar: '#toolbar',                //工具按钮用哪个容器
-                striped: true,                      //是否显示行间隔色
-                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-                pagination: true,                   //是否显示分页（*）
-                sortable: false,                    //是否启用排序
-                sortOrder: "asc",                   //排序方式
-                queryParams: function (params) {
-                    var param={};
-                    param.pageSize=params.limit;
-                    param.pageNumber=(params.offset / params.limit) + 1;
-                    param.memberName=$("[name='queryMemberName']").val();
-                    return param;
-                },                                  //传递参数（*）
-                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-                pageSize: 5,                       //每页的记录行数（*）
-                pageList: [5, 10, 20],        //可供选择的每页的行数（*）
-                showColumns: true,                  //是否显示所有的列
-                showRefresh: true,                  //是否显示刷新按钮
-                minimumCountColumns: 2,             //最少允许的列数
-                clickToSelect: false,                //是否启用点击选中行
-                uniqueId: "memberId",                 //每一行的唯一标识，一般为主键列
-                showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
-                cardView: false,                    //是否显示详细视图
-                columns: [{
-                    checkbox: true
-                }, {
-                    field: 'memberId',
-                    title: '会员编号',
-                }, {
-                    field: 'memberName',
-                    title: '会员名称',
+    <!--用户详情-->
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="userModalLabel">用户详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">用户编号</label>
+                        <div class="col-xs-10 userId">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">用户名称</label>
+                        <div class="col-xs-10 userName">
+                        </div>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <label class="control-label col-xs-2">用户手机</label>
+                        <div class="col-xs-10 phone">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                }, {
-                    field: 'phone',
-                    title: '会员手机',
+<!--必须的js文件-->
+<script src="Content/jquery-1.9.1.min.js"></script>
+<script src="Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="Content/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="Content/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="Content/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        getCurrentUserName();
 
-                }, {
-                    field: 'email',
-                    title: '会员邮箱'
-                }, {
-                    title: '操作',
-                    formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
-                        var html = '<button type="button" onclick="editModel(\''+row.memberId+'\')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
-                                   '<button type="button" onclick="deleteModel(\'' + row.memberId + '\')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
-                        return html;
-                    }
-                }]
-            });
+        //表格的初始化
+        $('#tb_user').bootstrapTable({
+            url:'memberController/getMemberList',
+            method: 'post',                     //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                    //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: function (params) {
+                var param={};
+                param.pageSize=params.limit;
+                param.pageNumber=(params.offset / params.limit) + 1;
+                param.memberName=$("[name='queryMemberName']").val();
+                return param;
+            },                                  //传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageSize: 5,                       //每页的记录行数（*）
+            pageList: [5, 10, 20],        //可供选择的每页的行数（*）
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+            uniqueId: "memberId",                 //每一行的唯一标识，一般为主键列
+            showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'memberId',
+                title: '会员编号',
+            }, {
+                field: 'memberName',
+                title: '会员名称',
 
-            //新增事件
-            $("#btn_add").on('click', function () {
-                $('#tb_user').bootstrapTable("resetView");
-                //弹出模态框
-                $("#myModal").modal();
-                //给弹出框里面的各个文本框赋值
-                $("#myModal input").val("");
-                $("#myModal textarea").val("");
-            });
+            }, {
+                field: 'phone',
+                title: '会员手机',
 
+            }, {
+                field: 'email',
+                title: '会员邮箱'
+            }, {
+                title: '操作',
+                formatter: function (value, row, index) {//这里的三个参数：value表示当前行当前列的值；row表示当前行的数据；index表示当前行的索引（从0开始）。
+                    var html = '<button type="button" onclick="editModel(\''+row.memberId+'\')" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria- hidden="true" ></span >编辑</button >&nbsp;&nbsp;' +
+                        '<button type="button" onclick="deleteModel(\'' + row.memberId + '\')" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria- hidden="true" ></span >删除</button >';
+                    return html;
+                }
+            }]
         });
 
-        //编辑事件
-        var editModel = function (id) {
-            //根据当前行的id获取当前的行数据
-            var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+        //新增事件
+        $("#btn_add").on('click', function () {
+            $('#tb_user').bootstrapTable("resetView");
             //弹出模态框
             $("#myModal").modal();
             //给弹出框里面的各个文本框赋值
-            $("#myModal input[name='memberId']").val(row.memberId);
-            $("#myModal input[name='memberName']").val(row.memberName);
-            $("#myModal input[name='phone']").val(row.phone);
-            $("#myModal input[name='email']").val(row.email);
-        }
+            $("#myModal input").val("");
+            $("#myModal textarea").val("");
+        });
 
-        //删除事件
-        var deleteModel = function (id) {
-            $.ajax({
-                type: "post",
-                url: "memberController/deleteMember",
-                data: {"memberId":id},
-                success: function (data) {
-                    if(data.code=="1"){
-                        alert("操作成功");
-                    }else{
-                        alert("操作失败");
-                    }
-                    refreshTable('tb_user');
+    });
+
+    //编辑事件
+    var editModel = function (id) {
+        //根据当前行的id获取当前的行数据
+        var row = $("#tb_user").bootstrapTable('getRowByUniqueId', id);
+        //弹出模态框
+        $("#myModal").modal();
+        //给弹出框里面的各个文本框赋值
+        $("#myModal input[name='memberId']").val(row.memberId);
+        $("#myModal input[name='memberName']").val(row.memberName);
+        $("#myModal input[name='phone']").val(row.phone);
+        $("#myModal input[name='email']").val(row.email);
+    }
+
+    //删除事件
+    var deleteModel = function (id) {
+        $.ajax({
+            type: "post",
+            url: "memberController/deleteMember",
+            data: {"memberId":id},
+            success: function (data) {
+                if(data.code=="1"){
+                    alert("操作成功");
+                }else{
+                    alert("操作失败");
                 }
-            });
-
-        }
-
-        //保存或修改事件
-        $("#save").on('click', function () {
-            var param={};
-            param.memberId=$("#myModal input[name='memberId']").val();
-            param.memberName=$("#myModal input[name='memberName']").val();
-            param.phone=$("#myModal input[name='phone']").val();
-            param.email=$("#myModal input[name='email']").val();
-            var url="memberController/insertMember";
-            if(param.memberId!=""){
-                url="memberController/updateMember";
+                refreshTable('tb_user');
             }
-            $.ajax({
-                type: "post",
-                url: url,
-                data: param,
-                success: function (data) {
-                    if(data.code=="1"){
-                        alert("操作成功");
-                    }else{
-                        alert("操作失败");
-                    }
-                    $('#myModal').modal('toggle');
-                    refreshTable('tb_user');
-                }
-            });
         });
 
-        //查询
-        $("#btn_query").on('click', function () {
-            refreshTable('tb_user');
-        });
+    }
 
-        //重置
-        $("#btn_reset").on('click', function () {
-            $("[name='queryMemberName']").val("");
-        });
-
-        /**
-         * 刷新表格
-         */
-        function refreshTable(id){
-            $('#'+id).bootstrapTable('refresh');
+    //保存或修改事件
+    $("#save").on('click', function () {
+        var param={};
+        param.memberId=$("#myModal input[name='memberId']").val();
+        param.memberName=$("#myModal input[name='memberName']").val();
+        param.phone=$("#myModal input[name='phone']").val();
+        param.email=$("#myModal input[name='email']").val();
+        var url="memberController/insertMember";
+        if(param.memberId!=""){
+            url="memberController/updateMember";
         }
-    </script>
+        $.ajax({
+            type: "post",
+            url: url,
+            data: param,
+            success: function (data) {
+                if(data.code=="1"){
+                    alert("操作成功");
+                }else{
+                    alert("操作失败");
+                }
+                $('#myModal').modal('toggle');
+                refreshTable('tb_user');
+            }
+        });
+    });
+
+    //查询
+    $("#btn_query").on('click', function () {
+        refreshTable('tb_user');
+    });
+
+    //重置
+    $("#btn_reset").on('click', function () {
+        $("[name='queryMemberName']").val("");
+    });
+
+    /**
+     * 刷新表格
+     */
+    function refreshTable(id){
+        $('#'+id).bootstrapTable('refresh');
+    }
+
+    /**
+     * 注销
+     */
+    function logout(){
+        $.ajax({
+            url: "logout",
+            method: "POST"
+        });
+        return true;
+    }
+
+    /**
+     * 获取当前用户登录信息
+     */
+    function getCurrentUserName(){
+        $.ajax({
+            type: "post",
+            url: "userController/userName",
+            data: {},
+            success: function (data) {
+                $(".user-info-username").text(data);
+            }
+        });
+    }
+
+    /**
+     * 获取用户信息详情
+     */
+    function getCurrentInfo() {
+        //弹出模态框
+        $("#userModal").modal();
+        $.ajax({
+            type: "post",
+            url: "userController/getUserInfo",
+            data: {},
+            success: function (data) {
+                $("#userModal .userId").text(data.userId);
+                $("#userModal .userName").text(data.userName);
+                $("#userModal .phone").text(data.phone);
+            }
+        });
+    }
+
+</script>
 </body>
 </html>
