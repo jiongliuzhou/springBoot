@@ -23,6 +23,8 @@ public class ClientSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
+                .headers().frameOptions().disable()
+                .and()
                 .csrf().disable();
     }
 

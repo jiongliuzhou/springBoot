@@ -18,6 +18,15 @@ public class IndexController {
      */
     @RequestMapping("/index")
     public String index(){
+        return "index";
+    }
+
+    /**
+     * 跳转会员列表页面
+     * @return
+     */
+    @RequestMapping("/list")
+    public String list(){
         return "list";
     }
 }

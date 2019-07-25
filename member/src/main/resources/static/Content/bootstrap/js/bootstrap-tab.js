@@ -3,8 +3,8 @@
     //var rand = Math.random().toString();
     //var id = rand.substring(rand.indexOf('.') + 1);
     //debugger;
-    var url = window.location.protocol + '//' + window.location.host;
-    options.url = url + options.url;
+    //var url = window.location.protocol + '//' + window.location.host;
+    options.url = options.url;
     id = "tab_" + options.id;
 	var active_flag = false;
 	if($("#" + id)){
