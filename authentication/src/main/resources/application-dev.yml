@@ -29,5 +29,6 @@ logging:
   level:
     com.lz: debug
     org.springfromework: debug
+    org.springframework.security: debug
   #file: app.log
 

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>统一管理平台</title>
+    <!--Bootstrap-->
+    <link href="Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/sidebar-menu/sidebar-menu.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-rtl.min.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-skins.min.css" rel="stylesheet" />
+    <link href="Content/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap/css/bootstrap-tab.css" rel="stylesheet"/>
+
+    <script src="Content/jquery-1.9.1.min.js"></script>
+    <script src="Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="Content/sidebar-menu/sidebar-menu.js"></script>
+    <script src="Content/bootstrap/js/bootstrap-tab.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-default" id="navbar">
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="icon-leaf"></i>
+                        后台管理系统
+                    </small>
+                </a>
+            </div>
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    
+                       <li class="light-blue" style="height:50px;margin-right:-20px;">
+                          
+                           <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                               <img class="nav-user-photo" src="Content/ace/avatars/avatar2.png" alt="Admin's Photo" />
+                               <span class="user-info">
+                                   <small>欢迎光临,</small>
+                                   1310177
+                               </span>
+       
+                               <i class="icon-caret-down"></i>
+                           </a>
+                           <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                               <li>
+                                   <a href="#">
+                                       <i class="icon-user"></i>
+                                       个人资料
+                                   </a>
+                               </li>
+                               <li class="divider"></li>
+                               <li>
+                                   <a href="/Home/Logout">
+                                       <i class="icon-off"></i>
+                                       退出
+                                   </a>
+                               </li>
+                           </ul>
+                       </li>
+                   </ul>
+            </div>
+		
+        </div>
+	    
+    </div>
+    <div class="main-container" id="main-container">
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+            <div class="sidebar" id="sidebar">
+                <ul class="nav nav-list" id="menu"></ul>
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="row" style="margin-right:-20px;margin-left:-20px;">
+                        <div class="col-xs-12" style="padding-left:0px;padding-right:0px;">
+                            <ul class="nav-my-tab">
+                                <li class="leftbackward"><a href="#" >
+                                    <i class="icon-backward"></i></a>
+                                </li>
+                                <li class="middletab">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#Index" role="tab" data-toggle="tab">
+                                            <i class="icon-home"></i>系统首页</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="rightforward"><a href="#">
+                                        <i class="icon-forward"></i></a>
+                                 </li>
+                            </ul>
+                            
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="Index" style="height:100%">
+					<h2>欢迎进入后台管理系统</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+    </div>
+    <script type="text/javascript">
+        //toastr.options.positionClass = 'toast-bottom-right';
+        $(function () {
+            $('#menu').sidebarMenu({
+                data: [{
+                    id: '1',
+                    text: '系统管理',
+                    icon: 'icon-cog',
+                    url: '',
+                    menus: [{
+                        id: '11',
+                        text: '用户管理',
+                        icon: 'icon-glass',
+                        url: ''
+                    },{
+                        id: '12',
+                        text: '角色管理',
+                        icon: 'icon-glass',
+                        url: ''
+                    },{
+                        id: '13',
+                        text: '权限管理',
+                        icon: 'icon-glass',
+                        url: ''
+                    },{
+                        id: '14',
+                        text: '资源管理',
+                        icon: 'icon-glass',
+                        url: ''
+                    }]
+                }, {
+                    id: '2',
+                    text: '会员管理',
+                    icon: 'icon-leaf',
+                    url: '',
+                    menus: [{
+                        id: '21',
+                        text: '会员列表',
+                        icon: 'icon-glass',
+                        url: 'http://127.0.0.1:8081/member/list'
+                    }]
+                }]
+            });
+        });
+    </script>
+    <script src="Content/ace/js/ace-extra.min.js"></script>
+    <script src="Content/ace/js/ace.min.js"></script>
+</body>
+</html>

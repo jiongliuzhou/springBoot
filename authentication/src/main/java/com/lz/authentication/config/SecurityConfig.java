@@ -29,13 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/oauth/**","/login/**", "/logout").permitAll()
+                .antMatchers("/oauth/**","/login/**").permitAll()
                 .anyRequest().authenticated()   // 其他地址的访问均需验证权限
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .and()
-                .logout()
                 .and()
                 //自定义登录页面时需要关闭csrf
                 .csrf().disable();
