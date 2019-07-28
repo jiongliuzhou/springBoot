@@ -11,16 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
-
-    /**
-     * 跳转到首页
-     * @return
-     */
-    @RequestMapping("/index")
-    public String index(){
-        return "index";
-    }
-
     /**
      * 跳转会员列表页面
      * @return

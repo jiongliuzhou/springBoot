@@ -31,136 +31,61 @@
     </style>
 </head>
 <body>
-<div class="navbar navbar-default" id="navbar" style="margin-bottom: 0px;">
-    <div class="navbar-container" id="navbar-container">
-        <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
-                <small>
-                    <i class="icon-leaf"></i>
-                    会员管理系统
-                </small>
-            </a>
-        </div>
-
-        <div class="navbar-header pull-right" role="navigation">
-            <ul class="nav ace-nav">
-
-                <li class="light-blue" style="height:50px;margin-right:-20px;">
-
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="Content/ace/avatars/avatar2.png" alt="Admin's Photo" />
-                        <span class="user-info">
-                                <small>欢迎光临,</small>
-                                <span class="user-info-username"></span>
-                            </span>
-                        <i class="icon-caret-down"></i>
-                    </a>
-                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
-                            <a href="#" onclick="getCurrentInfo()">
-                                <i class="icon-user"></i>
-                                个人信息
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" onclick="logout()">
-                                <i class="icon-off"></i>
-                                退出
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</div>
-
-<div class="main-container" id="main-container">
-    <div class="panel-body" style="padding-bottom:0px;">
-        <div id="toolbar">
-            <form class="form-inline">
-                <button id="btn_add" type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-                </button>
-                <div class="form-group">
-                    <input type="text" name="queryMemberName" class="form-control" placeholder="会员名称">
-                </div>
-                <button id="btn_query" type="button" class="btn btn-primary">查询</button>
-                <button id="btn_reset" type="button" class="btn btn-primary">重置</button>
-            </form>
-        </div>
-        <table id="tb_user"></table>
-    </div>
-
-    <!--新增或者编辑的弹出框-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">操作</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="memberId" class="form-control" placeholder="会员编号">
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">会员名称</label>
-                        <div class="col-xs-10">
-                            <input type="text" name="memberName" class="form-control" placeholder="会员名称">
-                        </div>
+    <div class="main-container" id="main-container">
+        <div class="panel-body" style="padding-bottom:0px;">
+            <div id="toolbar">
+                <form class="form-inline">
+                    <button id="btn_add" type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                    </button>
+                    <div class="form-group">
+                        <input type="text" name="queryMemberName" class="form-control" placeholder="会员名称">
                     </div>
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">会员电话</label>
-                        <div class="col-xs-10">
-                            <input type="text" name="phone" class="form-control" placeholder="会员电话">
-                        </div>
-                    </div>
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">会员邮箱</label>
-                        <div class="col-xs-10">
-                            <input type="text" name="email" class="form-control" placeholder="会员邮箱">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                    <button type="button" id="save" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
-                </div>
-
+                    <button id="btn_query" type="button" class="btn btn-primary">查询</button>
+                    <button id="btn_reset" type="button" class="btn btn-primary">重置</button>
+                </form>
             </div>
+            <table id="tb_user"></table>
         </div>
-    </div>
 
-    <!--用户详情-->
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userModalLabel">用户详情</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">用户编号</label>
-                        <div class="col-xs-10 userId">
+        <!--新增或者编辑的弹出框-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="memberId" class="form-control" placeholder="会员编号">
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">会员名称</label>
+                            <div class="col-xs-10">
+                                <input type="text" name="memberName" class="form-control" placeholder="会员名称">
+                            </div>
+                        </div>
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">会员电话</label>
+                            <div class="col-xs-10">
+                                <input type="text" name="phone" class="form-control" placeholder="会员电话">
+                            </div>
+                        </div>
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">会员邮箱</label>
+                            <div class="col-xs-10">
+                                <input type="text" name="email" class="form-control" placeholder="会员邮箱">
+                            </div>
                         </div>
                     </div>
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">用户名称</label>
-                        <div class="col-xs-10 userName">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                        <button type="button" id="save" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                     </div>
-                    <div class="row" style="padding:10px;">
-                        <label class="control-label col-xs-2">用户手机</label>
-                        <div class="col-xs-10 phone">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <!--必须的js文件-->
 <script src="Content/jquery-1.9.1.min.js"></script>
@@ -171,8 +96,6 @@
 <script src="Content/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        getCurrentUserName();
-
         //表格的初始化
         $('#tb_user').bootstrapTable({
             url:'memberController/getMemberList',
@@ -312,50 +235,6 @@
     function refreshTable(id){
         $('#'+id).bootstrapTable('refresh');
     }
-
-    /**
-     * 注销
-     */
-    function logout(){
-        $.ajax({
-            url: "logout",
-            method: "POST"
-        });
-        return true;
-    }
-
-    /**
-     * 获取当前用户登录信息
-     */
-    function getCurrentUserName(){
-        $.ajax({
-            type: "post",
-            url: "userController/userName",
-            data: {},
-            success: function (data) {
-                $(".user-info-username").text(data);
-            }
-        });
-    }
-
-    /**
-     * 获取用户信息详情
-     */
-    function getCurrentInfo() {
-        //弹出模态框
-        $("#userModal").modal();
-        $.ajax({
-            type: "post",
-            url: "userController/getUserInfo",
-            data: {},
-            success: function (data) {
-                $("#userModal .userId").text(data.userId);
-                $("#userModal .userName").text(data.userName);
-                $("#userModal .phone").text(data.phone);
-            }
-        });
-    }
-
 </script>
 </body>
 </html>
