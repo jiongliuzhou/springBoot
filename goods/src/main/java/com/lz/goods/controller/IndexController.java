@@ -16,7 +16,7 @@ public class IndexController {
      * 跳转到首页
      * @return
      */
-    @RequestMapping("/index")
+    @RequestMapping("/list")
     public String index(){
         return "list";
     }
