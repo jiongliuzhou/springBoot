@@ -32,3 +32,10 @@ logging:
     org.springframework.security: debug
   #file: app.log
 
+#dubbo配置
+dubbo:
+  application:
+    name: authentication
+  registry:
+    address: zookeeper://127.0.0.1:2181
+

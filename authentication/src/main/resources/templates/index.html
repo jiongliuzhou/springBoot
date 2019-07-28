@@ -42,21 +42,21 @@
                                <img class="nav-user-photo" src="Content/ace/avatars/avatar2.png" alt="Admin's Photo" />
                                <span class="user-info">
                                    <small>欢迎光临,</small>
-                                   1310177
+                                   <span class="user-info-username"></span>
                                </span>
        
                                <i class="icon-caret-down"></i>
                            </a>
                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                <li>
-                                   <a href="#">
+                                   <a href="#" onclick="getCurrentInfo()">
                                        <i class="icon-user"></i>
-                                       个人资料
+                                       个人信息
                                    </a>
                                </li>
                                <li class="divider"></li>
                                <li>
-                                   <a href="/Home/Logout">
+                                   <a href="#" onclick="logout()">
                                        <i class="icon-off"></i>
                                        退出
                                    </a>
@@ -114,6 +114,35 @@
         <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
+
+        <!--用户详情-->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="userModalLabel">用户详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">用户编号</label>
+                            <div class="col-xs-10 userId">
+                            </div>
+                        </div>
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">用户名称</label>
+                            <div class="col-xs-10 userName">
+                            </div>
+                        </div>
+                        <div class="row" style="padding:10px;">
+                            <label class="control-label col-xs-2">用户手机</label>
+                            <div class="col-xs-10 phone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         //toastr.options.positionClass = 'toast-bottom-right';
@@ -154,7 +183,18 @@
                         id: '21',
                         text: '会员列表',
                         icon: 'icon-glass',
-                        url: 'http://127.0.0.1:8081/member/list'
+                        url: 'http://127.0.0.1:8080/member/list'
+                    }]
+                }, {
+                    id: '3',
+                    text: '商品管理',
+                    icon: 'icon-leaf',
+                    url: '',
+                    menus: [{
+                        id: '31',
+                        text: '商品列表',
+                        icon: 'icon-glass',
+                        url: 'http://127.0.0.1:8081/good/list'
                     }]
                 }]
             });
@@ -162,5 +202,53 @@
     </script>
     <script src="Content/ace/js/ace-extra.min.js"></script>
     <script src="Content/ace/js/ace.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            getCurrentUserName();
+        });
+        /**
+         * 注销
+         */
+        function logout(){
+            $.ajax({
+                url: "logout",
+                method: "POST"
+            });
+            return true;
+        }
+
+        /**
+         * 获取当前用户登录信息
+         */
+        function getCurrentUserName(){
+            $.ajax({
+                type: "post",
+                url: "userController/userName",
+                data: {},
+                success: function (data) {
+                    $(".user-info-username").text(data);
+                }
+            });
+        }
+
+        /**
+         * 获取用户信息详情
+         */
+        function getCurrentInfo() {
+            //弹出模态框
+            $("#userModal").modal();
+            $.ajax({
+                type: "post",
+                url: "userController/getUserInfo",
+                data: {},
+                success: function (data) {
+                    $("#userModal .userId").text(data.userId);
+                    $("#userModal .userName").text(data.userName);
+                    $("#userModal .phone").text(data.phone);
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>
