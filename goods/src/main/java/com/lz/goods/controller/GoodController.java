@@ -55,7 +55,7 @@ public class GoodController {
      */
     @RequestMapping("/getGoodInfo")
     @ResponseBody
-    public Object getGoodInfo(GoodRequest param){
+    public Object getGoodInfo(@RequestBody GoodRequest param){
         Object obj;
         try {
             GoodVO goodInfo = goodService.getGoodInfo(param);
@@ -74,7 +74,7 @@ public class GoodController {
      */
     @RequestMapping("/insertGood")
     @ResponseBody
-    public Object insertGood(GoodRequest param){
+    public Object insertGood(@RequestBody GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.insertGood(param);
@@ -97,7 +97,7 @@ public class GoodController {
      */
     @RequestMapping("/updateGood")
     @ResponseBody
-    public Object updateGood(GoodRequest param){
+    public Object updateGood(@RequestBody GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.updateGood(param);
@@ -120,7 +120,7 @@ public class GoodController {
      */
     @RequestMapping("/deleteGood")
     @ResponseBody
-    public Object deleteGood(GoodRequest param){
+    public Object deleteGood(@RequestBody GoodRequest param){
         Object obj;
         try {
             Integer k = goodService.deleteGood(param);
