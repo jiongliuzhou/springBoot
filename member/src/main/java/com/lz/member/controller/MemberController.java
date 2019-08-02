@@ -55,7 +55,7 @@ public class MemberController {
      */
     @RequestMapping("/getMemberInfo")
     @ResponseBody
-    public Object getMemberInfo(MemberRequest param){
+    public Object getMemberInfo(@RequestBody MemberRequest param){
         Object obj;
         try {
             MemberVO memberInfo = memberService.getMemberInfo(param);
@@ -74,7 +74,7 @@ public class MemberController {
      */
     @RequestMapping("/insertMember")
     @ResponseBody
-    public Object insertMember(MemberRequest param){
+    public Object insertMember(@RequestBody MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.insertMember(param);
@@ -97,7 +97,7 @@ public class MemberController {
      */
     @RequestMapping("/updateMember")
     @ResponseBody
-    public Object updateMember(MemberRequest param){
+    public Object updateMember(@RequestBody MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.updateMember(param);
@@ -120,7 +120,7 @@ public class MemberController {
      */
     @RequestMapping("/deleteMember")
     @ResponseBody
-    public Object deleteMember(MemberRequest param){
+    public Object deleteMember(@RequestBody MemberRequest param){
         Object obj;
         try {
             Integer k = memberService.deleteMember(param);
