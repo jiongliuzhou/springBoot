@@ -24,6 +24,14 @@ public interface SysUserRoleMapper {
     List<SysRole> getUserRoleList(UserRoleRequest param);
 
     /**
+     * 获取用户列表
+     * @param userId
+     * @return
+     */
+    @SelectProvider(type = SysUserRoleProvider.class,method = "getUserRoleById")
+    List<SysRole> getUserRoleById(String userId);
+
+    /**
      * 获取用户详情
      * @param param
      * @return

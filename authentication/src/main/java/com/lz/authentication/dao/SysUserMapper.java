@@ -20,7 +20,9 @@ public interface SysUserMapper {
      * @param param
      * @return
      */
-    @SelectProvider(type = SysUserProvider.class,method = "getUserList")
+    @Select("select USER_ID userId,USERNAME userName,PASSWORD password,PHONE phone from SYS_USER where STATUS=0")
+    @Results({
+            @Result(property = "roleList",javaType=List.class,column = "userId",many = @Many(select = "com.lz.authentication.dao.SysUserRoleMapper.getUserRoleById"))})
     List<SysUser> getUserList(UserRequest param);
 
     /**
