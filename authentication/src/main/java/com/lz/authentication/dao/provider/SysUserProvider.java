@@ -21,7 +21,7 @@ public class SysUserProvider {
      */
     public String getUserList(UserRequest param){
         SQL sql=new SQL();
-        sql.SELECT("USER_ID userId","USERNAME userName","PASSWORD password","PHONE phone")
+        sql.SELECT("USER_ID id","USER_ID userId","USERNAME userName","PASSWORD password","PHONE phone")
                 .FROM(Constants.SYS_USER.getKey());
         sql.WHERE("STATUS=0");
         if(param.getUserName()!=null && !"".equals(param.getUserName())){

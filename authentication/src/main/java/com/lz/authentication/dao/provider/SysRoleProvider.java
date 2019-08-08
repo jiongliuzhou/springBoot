@@ -31,6 +31,20 @@ public class SysRoleProvider {
     }
 
     /**
+     * 获取用户角色列表
+     * @param userId
+     * @return
+     */
+    public String getUserRoleById(String userId){
+        log.debug(userId);
+        StringBuilder sb=new StringBuilder();
+        sb.append("SELECT r.ROLE_ID roleId,ROLE_NAME roleName FROM "+Constants.SYS_ROLE.getKey()+" r" +
+                " ,"+Constants.SYS_USER_ROLE.getKey()+" ur where ur.role_id=r.role_id ");
+        sb.append(" AND ur.USER_ID=#{userId}");
+        return sb.toString();
+    }
+
+    /**
      * 获取查询角色详情sql
      * @param param
      * @return
