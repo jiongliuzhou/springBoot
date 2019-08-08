@@ -21,6 +21,10 @@ public interface SysRoleMapper {
      * @return
      */
     @SelectProvider(type = SysRoleProvider.class,method = "getRoleList")
+    @Results({
+            @Result(property = "roleId",column = "id"),
+            @Result(property = "permissionList",javaType=List.class,column = "roleId",
+                    many = @Many(select = "com.lz.authentication.dao.SysPermissionMapper.getPermissionByRoleId"))})
     List<SysRole> getRoleList(RoleRequest param);
 
     /**
@@ -29,6 +33,10 @@ public interface SysRoleMapper {
      * @return
      */
     @SelectProvider(type = SysRoleProvider.class,method = "getUserRoleById")
+    @Results({
+            @Result(property = "roleId",column = "id"),
+            @Result(property = "permissionList",javaType=List.class,column = "roleId",
+                    many = @Many(select = "com.lz.authentication.dao.SysPermissionMapper.getPermissionByRoleId"))})
     List<SysRole> getUserRoleById(String userId);
 
     /**

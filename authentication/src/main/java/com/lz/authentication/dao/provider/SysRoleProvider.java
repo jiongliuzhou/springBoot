@@ -21,7 +21,7 @@ public class SysRoleProvider {
      */
     public String getRoleList(RoleRequest param){
         SQL sql=new SQL();
-        sql.SELECT("ROLE_ID roleId","ROLE_NAME roleName")
+        sql.SELECT("ROLE_ID id","ROLE_ID roleId","ROLE_NAME roleName")
                 .FROM(Constants.SYS_ROLE.getKey());
         sql.WHERE("0=0");
         if(param.getRoleName()!=null && !"".equals(param.getRoleName())){
@@ -38,7 +38,7 @@ public class SysRoleProvider {
     public String getUserRoleById(String userId){
         log.debug(userId);
         StringBuilder sb=new StringBuilder();
-        sb.append("SELECT r.ROLE_ID roleId,ROLE_NAME roleName FROM "+Constants.SYS_ROLE.getKey()+" r" +
+        sb.append("SELECT r.ROLE_ID id,r.ROLE_ID roleId,ROLE_NAME roleName FROM "+Constants.SYS_ROLE.getKey()+" r" +
                 " ,"+Constants.SYS_USER_ROLE.getKey()+" ur where ur.role_id=r.role_id ");
         sb.append(" AND ur.USER_ID=#{userId}");
         return sb.toString();

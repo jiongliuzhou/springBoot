@@ -21,13 +21,26 @@ public class SysPermissionProvider {
      */
     public String getPermissionList(PermissionRequest param){
         SQL sql=new SQL();
-        sql.SELECT("PERMISSION_ID permissionId","PERMISSION_NAME permissionName")
+        sql.SELECT("PERMISSION_ID id","PERMISSION_ID permissionId","PERMISSION_NAME permissionName")
                 .FROM(Constants.SYS_PERMISSION.getKey())
                 .WHERE("0=0");
         if(param.getPermissionName()!=null && !"".equals(param.getPermissionName())){
             sql.WHERE("PERMISSION_NAME=#{permissionName}");
         }
         return sql.toString();
+    }
+
+    /**
+     * 根据角色id获取权限id
+     * @param roleId
+     * @return
+     */
+    public String getPermissionByRoleId(String roleId){
+        StringBuilder sb=new StringBuilder();
+        sb.append("select p.PERMISSION_ID id,p.PERMISSION_ID permissionId,p.PERMISSION_NAME permissionName " +
+                " from "+Constants.SYS_ROLE_PERMISSION.getKey()+" rp,"+Constants.SYS_PERMISSION.getKey()+" p " +
+                " where rp.PERMISSION_ID=p.PERMISSION_ID and rp.ROLE_ID=#{roleId}");
+        return sb.toString();
     }
 
     /**

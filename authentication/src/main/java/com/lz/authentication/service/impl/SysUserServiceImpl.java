@@ -2,18 +2,9 @@ package com.lz.authentication.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lz.authentication.bean.request.PermissionResourceRequest;
-import com.lz.authentication.bean.request.RolePermissionRequest;
 import com.lz.authentication.bean.request.UserRequest;
-import com.lz.authentication.bean.request.UserRoleRequest;
-import com.lz.authentication.bean.vo.SysPermission;
-import com.lz.authentication.bean.vo.SysResource;
-import com.lz.authentication.bean.vo.SysRole;
 import com.lz.authentication.bean.vo.SysUser;
-import com.lz.authentication.dao.SysPermissionResourceMapper;
-import com.lz.authentication.dao.SysRolePermissionMapper;
 import com.lz.authentication.dao.SysUserMapper;
-import com.lz.authentication.dao.SysUserRoleMapper;
 import com.lz.authentication.service.SysUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +22,6 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserMapper sysUserMapper;
-    @Resource
-    private SysUserRoleMapper sysUserRoleMapper;
-    @Resource
-    private SysRolePermissionMapper sysRolePermissionMapper;
-    @Resource
-    private SysPermissionResourceMapper sysPermissionResourceMapper;
 
     /**
      * 根据用户名获取系统用户信息
@@ -54,31 +39,6 @@ public class SysUserServiceImpl implements SysUserService {
             return sysUser;
         }
         sysUser=userList.get(0);
-        //获取用户角色信息
-        UserRoleRequest userRoleRequest=new UserRoleRequest();
-        userRoleRequest.setUserId(sysUser.getUserId());
-        List<SysRole> userRoleList = sysUserRoleMapper.getUserRoleList(userRoleRequest);
-        if(!(userRoleList!=null && !userRoleList.isEmpty())){
-            return sysUser;
-        }
-        //获取角色权限信息
-        for (SysRole s:userRoleList){
-            RolePermissionRequest rolePermissionRequest=new RolePermissionRequest();
-            rolePermissionRequest.setRoleId(s.getRoleId());
-            List<SysPermission> rolePermissionList = sysRolePermissionMapper.getRolePermissionList(rolePermissionRequest);
-            if(!(rolePermissionList!=null && !rolePermissionList.isEmpty())){
-                continue;
-            }
-            //获取资源信息
-            for(SysPermission p:rolePermissionList){
-                PermissionResourceRequest permissionResourceRequest=new PermissionResourceRequest();
-                permissionResourceRequest.setPermissionId(p.getPermissionId());
-                List<SysResource> permissionResourceList = sysPermissionResourceMapper.getPermissionResourceList(permissionResourceRequest);
-                p.setResourceList(permissionResourceList);
-            }
-            s.setPermissionList(rolePermissionList);
-        }
-        sysUser.setRoleList(userRoleList);
         return sysUser;
     }
 

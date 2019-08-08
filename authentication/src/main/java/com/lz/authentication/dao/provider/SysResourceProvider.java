@@ -31,6 +31,19 @@ public class SysResourceProvider {
     }
 
     /**
+     * 根据权限id获取资源列表
+     * @param permissionId
+     * @return
+     */
+    public String getResourceByPermissionId(String permissionId){
+        StringBuilder sb=new StringBuilder();
+        sb.append("select r.RESOURCE_ID resourceId,r.RESOURCE_NAME resourceName,r.URL url,r.PARENT_RESOURCE_ID parentResourceId " +
+                " from "+Constants.SYS_PERMISSION_RESOURCE.getKey()+" pr,"+Constants.SYS_RESOURCE.getKey()+" r where " +
+                " pr.RESOURCE_ID=r.RESOURCE_ID and pr.PERMISSION_ID=#{permissionId}");
+        return sb.toString();
+    }
+
+    /**
      * 获取查询资源详情sql
      * @param param
      * @return

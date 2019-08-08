@@ -24,6 +24,14 @@ public interface SysResourceMapper {
     List<SysResource> getResourceList(ResourceRequest param);
 
     /**
+     * 获取资源列表
+     * @param permissionId
+     * @return
+     */
+    @SelectProvider(type = SysResourceProvider.class,method = "getResourceByPermissionId")
+    List<SysResource> getResourceByPermissionId(String permissionId);
+
+    /**
      * 获取资源详情
      * @param param
      * @return

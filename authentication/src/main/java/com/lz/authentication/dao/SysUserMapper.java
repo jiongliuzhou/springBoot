@@ -23,7 +23,8 @@ public interface SysUserMapper {
     @SelectProvider(type = SysUserProvider.class,method = "getUserList")
     @Results({
             @Result(property = "userId",column = "id"),
-            @Result(property = "roleList",javaType=List.class,column = "userId",many = @Many(select = "com.lz.authentication.dao.SysRoleMapper.getUserRoleById"))})
+            @Result(property = "roleList",javaType=List.class,column = "userId",
+                    many = @Many(select = "com.lz.authentication.dao.SysRoleMapper.getUserRoleById"))})
     List<SysUser> getUserList(UserRequest param);
 
 
@@ -33,6 +34,10 @@ public interface SysUserMapper {
      * @return
      */
     @SelectProvider(type = SysUserProvider.class,method = "getUserInfo")
+    @Results({
+            @Result(property = "userId",column = "id"),
+            @Result(property = "roleList",javaType=List.class,column = "userId",
+                    many = @Many(select = "com.lz.authentication.dao.SysRoleMapper.getUserRoleById"))})
     SysUser getUserInfo(@Param("param") UserRequest param);
 
     /**

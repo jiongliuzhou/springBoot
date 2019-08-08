@@ -21,7 +21,23 @@ public interface SysPermissionMapper {
      * @return
      */
     @SelectProvider(type = SysPermissionProvider.class,method = "getPermissionList")
+    @Results({
+            @Result(property = "permissionId",column = "id"),
+            @Result(property = "resourceList",javaType=List.class,column = "permissionId",
+                    many = @Many(select = "com.lz.authentication.dao.SysResourceMapper.getResourceByPermissionId"))})
     List<SysPermission> getPermissionList(PermissionRequest param);
+
+    /**
+     * 根据角色id获取权限信息
+     * @param param
+     * @return
+     */
+    @SelectProvider(type = SysPermissionProvider.class,method = "getPermissionByRoleId")
+    @Results({
+            @Result(property = "permissionId",column = "id"),
+            @Result(property = "resourceList",javaType=List.class,column = "permissionId",
+                    many = @Many(select = "com.lz.authentication.dao.SysResourceMapper.getResourceByPermissionId"))})
+    List<SysPermission> getPermissionByRoleId(PermissionRequest param);
 
     /**
      * 获取权限详情

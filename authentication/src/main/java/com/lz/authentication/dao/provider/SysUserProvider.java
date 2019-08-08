@@ -38,7 +38,7 @@ public class SysUserProvider {
     public String getUserInfo(@Param("param") UserRequest param){
         log.info(param.toString());
         SQL sql=new SQL();
-        sql.SELECT("USER_ID userId","USERNAME userName","PASSWORD password","PHONE phone")
+        sql.SELECT("USER_ID id","USER_ID userId","USERNAME userName","PASSWORD password","PHONE phone")
                 .FROM(Constants.SYS_USER.getKey())
                 .WHERE("STATUS=0")
                 .WHERE("USER_ID=#{param.userId}");
