@@ -42,6 +42,7 @@
 		<dubbo.version>2.6.2</dubbo.version>
 		<dubbo.spring-context-support>1.0.2</dubbo.spring-context-support>
 		<curator.version>2.12.0</curator.version>
+		<mail.version>1.5.0-b01</mail.version>
 	</properties>
 
 	<dependencies>
